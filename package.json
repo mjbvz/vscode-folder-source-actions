@@ -1,5 +1,6 @@
 {
     "name": "folder-source-actions",
+    "private": true,
     "displayName": "folder-source-actions",
     "description": "Apply organize imports to all files in a folder",
     "version": "0.0.1",
@@ -14,6 +15,13 @@
     "bugs": {
         "url": "https://github.com/mjbvz/vscode-folder-source-actions/issues"
     },
+    "keywords": [
+        "imports",
+        "organize",
+        "sort",
+        "javascript",
+        "typescript"
+    ],
     "categories": [
         "Other"
     ],

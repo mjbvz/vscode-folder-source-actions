@@ -18,7 +18,7 @@
         "commands": [
             {
                 "command": "folderSourceActions.organizeImports",
-                "title": "Organize imports in folder"
+                "title": "Organize Imports in Folder"
             }
         ],
         "menus": {

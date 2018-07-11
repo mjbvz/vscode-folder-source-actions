@@ -11,7 +11,7 @@ async function organizeImportsInDirectory(dir: vscode.Uri) {
     vscode.window.withProgress(
         {
             location: vscode.ProgressLocation.Window,
-            title: "Organizing imports in folder"
+            title: "Organizing Imports in Folder"
         },
         async () => {
             const combinedEdits = new vscode.WorkspaceEdit();

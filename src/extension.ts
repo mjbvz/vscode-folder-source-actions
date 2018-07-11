@@ -14,43 +14,19 @@ async function organizeImportsInDirectory(dir: vscode.Uri) {
             title: "Organizing Imports in Folder"
         },
         async () => {
-            const combinedEdits = new vscode.WorkspaceEdit();
-            const commands: vscode.Command[] = [];
-            for (const action of await getOrganizeImportsActionsForDirectory(dir)) {
-                if (action.edit) {
-                    appendWorkspaceEdits(combinedEdits, action.edit);
-                }
-                if (action.command) {
-                    commands.push(action.command);
-                }
-            }
-
-            if (combinedEdits.size > 0) {
-                await vscode.workspace.applyEdit(combinedEdits);
-            }
-            for (const command of commands) {
-                await vscode.commands.executeCommand(command.command, ...(command.arguments || []));
-            }
+            const files = await getPotentialFilesToOrganize(dir);
+            return Promise.all(files
+                .map(getOrganizeImportsActionForFile)
+                .map(action => action.then(tryApplyCodeAction)));
         });
 }
 
-async function getOrganizeImportsActionsForDirectory(
+async function getPotentialFilesToOrganize(
     dir: vscode.Uri
-): Promise<ReadonlyArray<vscode.CodeAction>> {
-    const actions: vscode.CodeAction[] = [];
-
-    const files = await vscode.workspace.findFiles(
+): Promise<ReadonlyArray<vscode.Uri>> {
+    return vscode.workspace.findFiles(
         { base: dir.fsPath, pattern: '**/*' },
         '**/node_modules/**');
-
-    for (const file of files) {
-        const action = await getOrganizeImportsActionForFile(file);
-        if (action) {
-            actions.push(action);
-        }
-    }
-
-    return actions;
 }
 
 async function getOrganizeImportsActionForFile(
@@ -79,14 +55,17 @@ function isOrganizeImportsAction(action: vscode.CodeAction): boolean {
     return action && !!action.kind && vscode.CodeActionKind.SourceOrganizeImports.contains(action.kind);
 }
 
-function appendWorkspaceEdits(
-    builder: vscode.WorkspaceEdit,
-    editsToAppend: vscode.WorkspaceEdit
+async function tryApplyCodeAction(
+    action: vscode.CodeAction | undefined
 ) {
-    for (const [file, textEdits] of editsToAppend.entries()) {
-        for (const textEdit of textEdits) {
-            builder.replace(file, textEdit.range, textEdit.newText);
-        }
+    if (!action) {
+        return;
     }
-    return builder;
+
+    if (action.edit && action.edit.size > 0) {
+        await vscode.workspace.applyEdit(action.edit);
+    }
+    if (action.command) {
+        await vscode.commands.executeCommand(action.command.command, ...(action.command.arguments || []));
+    }
 }

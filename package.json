@@ -3,7 +3,7 @@
     "private": true,
     "displayName": "Folder source actions",
     "description": "Apply organize imports to all files in a folder",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "publisher": "bierner",
     "engines": {
         "vscode": "^1.26.0"

@@ -1,7 +1,7 @@
 {
     "name": "folder-source-actions",
     "private": true,
-    "displayName": "folder-source-actions",
+    "displayName": "Folder source actions",
     "description": "Apply organize imports to all files in a folder",
     "version": "0.0.1",
     "publisher": "bierner",

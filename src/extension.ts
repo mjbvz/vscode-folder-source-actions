@@ -34,11 +34,7 @@ async function getOrganizeImportsActionForFile(
 ): Promise<vscode.CodeAction | undefined> {
     try {
         const allActions = (await getAllCodeActionsForFile(file)) || [];
-        for (const action of allActions) {
-            if (isOrganizeImportsAction(action)) {
-                return action;
-            }
-        }
+        return allActions.find(isOrganizeImportsAction)
     } catch  {
         // noop 
     }

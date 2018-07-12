@@ -10,5 +10,4 @@ Adds a context menu that allows you to apply VS Code's organize imports code act
 
 - VS Code's built-in JavaScript and Typescript support
 - [Dart](https://github.com/Dart-Code/Dart-Code)
-- [Python](https://github.com/Microsoft/vscode-python)
 - Any extension that returns `source.organizeImports` code actions.

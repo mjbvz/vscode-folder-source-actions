@@ -6,7 +6,7 @@
     "version": "0.0.4",
     "publisher": "bierner",
     "engines": {
-        "vscode": "^1.26.0"
+        "vscode": "^1.32.0"
     },
     "repository": {
         "url": "https://github.com/mjbvz/vscode-folder-source-actions.git",
@@ -52,9 +52,9 @@
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
     "devDependencies": {
-        "typescript": "^2.9.2",
-        "vscode": "^1.1.6",
-        "tslint": "^5.8.0",
+        "typescript": "^3.3.3",
+        "vscode": "^1.1.29",
+        "tslint": "^5.12.1",
         "@types/node": "^7.0.43",
         "@types/mocha": "^2.2.42"
     }

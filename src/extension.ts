@@ -34,7 +34,7 @@ async function getOrganizeImportsActionForFile(
 ): Promise<vscode.CodeAction | undefined> {
     try {
         const allActions = (await getAllCodeActionsForFile(file)) || [];
-        return allActions.find(isOrganizeImportsAction)
+        return allActions.find(isOrganizeImportsAction);
     } catch  {
         // noop 
     }
@@ -43,8 +43,11 @@ async function getOrganizeImportsActionForFile(
 
 function getAllCodeActionsForFile(file: vscode.Uri): Thenable<ReadonlyArray<vscode.CodeAction> | undefined> {
     // We need make sure VS Code knows about the file before trying to request code actions
-    return vscode.workspace.openTextDocument(file).then(() =>
-        vscode.commands.executeCommand('vscode.executeCodeActionProvider', file, fakeWholeDocumentRange));
+    return vscode.workspace.openTextDocument(file).then(doc =>
+        vscode.commands.executeCommand('vscode.executeCodeActionProvider',
+            file,
+            fakeWholeDocumentRange,
+            vscode.CodeActionKind.SourceOrganizeImports));
 }
 
 function isOrganizeImportsAction(action: vscode.CodeAction): boolean {

@@ -26,7 +26,8 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:folderSourceActions.organizeImports"
+        "onCommand:folderSourceActions.organizeImports",
+        "onCommand:folderSourceActions.fixAll"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -34,6 +35,10 @@
             {
                 "command": "folderSourceActions.organizeImports",
                 "title": "Organize Imports in Folder"
+            },
+            {
+                "command": "folderSourceActions.fixAll",
+                "title": "Fix All in Folder"
             }
         ],
         "menus": {
@@ -41,6 +46,20 @@
                 {
                     "command": "folderSourceActions.organizeImports",
                     "when": "explorerResourceIsFolder"
+                },
+                {
+                    "command": "folderSourceActions.fixAll",
+                    "when": "explorerResourceIsFolder"
+                }
+            ],
+            "commandPalette": [
+                {
+                    "command": "folderSourceActions.organizeImports",
+                    "when": "false"
+                },
+                {
+                    "command": "folderSourceActions.fixAll",
+                    "when": "false"
                 }
             ]
         }

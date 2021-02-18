@@ -52,7 +52,7 @@ async function getSourceActionForFile(
     try {
         const allActions = (await getAllCodeActionsForFile(file, kind)) || [];
         return allActions.find(actionFilter(kind));
-    } catch  {
+    } catch {
         // noop 
     }
     return undefined;

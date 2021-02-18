@@ -34,7 +34,7 @@ function createFolderSourceAction(
                     .map(file => getSourceActionForFile(kind, file))
                     .map(action => action.then(tryApplyCodeAction)));
             });
-    }
+    };
 }
 
 async function getPotentialFilesForSourceAction(

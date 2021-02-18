@@ -64,7 +64,7 @@ function getAllCodeActionsForFile(file: vscode.Uri, kind: vscode.CodeActionKind)
         vscode.commands.executeCommand('vscode.executeCodeActionProvider',
             file,
             fakeWholeDocumentRange,
-            kind));
+            kind.value));
 }
 
 function actionFilter(targetKind: vscode.CodeActionKind) {
